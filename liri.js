@@ -28,7 +28,7 @@ function getTweets() {
     client.get('statuses/user_timeline', params, function(error, tweets, response) {
         for (var i= 0; i <tweets.length; i++) {
             if (error) {console.log(error)} else {
-            console.log("Date: " + tweets[i].created_at + "\nTweet: " + tweets[i].text + "\n")
+            console.log("\nDate: " + tweets[i].created_at + "\nTweet: " + tweets[i].text + "\n")
             fs.appendFile('log.txt', ("Date: " + tweets[i].created_at + "\nTweet: " + tweets[i].text + "\n"), function(error){
                 if (error) {console.log(error)}
             })
@@ -50,7 +50,7 @@ function getSpotify() {
             return;
         }
         var spotifyResponse = data.tracks.items;
-            console.log("Song: " + spotifyResponse[0].name + "\nArtist: " + spotifyResponse[0].album.artists[0].name + "\nAlbum: " + spotifyResponse[0].album.name + "\nLink: " + spotifyResponse[0].external_urls.spotify)
+            console.log("\nSong: " + spotifyResponse[0].name + "\nArtist: " + spotifyResponse[0].album.artists[0].name + "\nAlbum: " + spotifyResponse[0].album.name + "\nLink: " + spotifyResponse[0].external_urls.spotify)
         fs.appendFile('log.txt', ("Song: " + spotifyResponse[0].name + "\nArtist: " + spotifyResponse[0].album.artists[0].name + "\nAlbum: " + spotifyResponse[0].album.name + "\nLink: " + spotifyResponse[0].external_urls.spotify), function(error){
             if (error) {console.log(error)}
         })
@@ -66,7 +66,7 @@ function getMovie() {
     }
     request('https://www.omdbapi.com?apikey=trilogy&t=' + movie + '&plot=full', function(err, response, body) {
         if (err) {console.log(err)} else{
-            console.log("Title: " + JSON.parse(body)['Title'] + "\nYear: " + JSON.parse(body)['Year'] + "\nCountry: " + JSON.parse(body)['Country'] + "\nLanguage: " + JSON.parse(body)['Language'] + "IMBD Rating: " + JSON.parse(body)['imbdRating'] + "\nRotten Tomatoes Rating: " + JSON.parse(body)['Ratings']['Value'] + "\nActors: " + JSON.parse(body)['Actors'] + "\nPlot: " + JSON.parse(body)['Plot'])
+            console.log("\nTitle: " + JSON.parse(body)['Title'] + "\nYear: " + JSON.parse(body)['Year'] + "\nCountry: " + JSON.parse(body)['Country'] + "\nLanguage: " + JSON.parse(body)['Language'] + "IMBD Rating: " + JSON.parse(body)['imbdRating'] + "\nRotten Tomatoes Rating: " + JSON.parse(body)['Ratings']['Value'] + "\nActors: " + JSON.parse(body)['Actors'] + "\nPlot: " + JSON.parse(body)['Plot'])
             fs.appendFile('log.txt', ("Title: " + JSON.parse(body)['Title'] + "\nYear: " + JSON.parse(body)['Year'] + "\nCountry: " + JSON.parse(body)['Country'] + "\nLanguage: " + JSON.parse(body)['Language'] + "IMBD Rating: " + JSON.parse(body)['imbdRating'] + "\nRotten Tomatoes Rating: " + JSON.parse(body)['Ratings']['Value'] + "\nActors: " + JSON.parse(body)['Actors'] + "\nPlot: " + JSON.parse(body)['Plot']), function(error){
                 if (error) {console.log(error)}
             })
