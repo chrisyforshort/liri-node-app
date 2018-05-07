@@ -8,6 +8,8 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var client = new Twitter(keys.twitter);
 
+var info
+
 // Conditionals to ask Liri to run different functions //
 if (process.argv[2] === "my-tweets") {
     getTweets();
@@ -18,7 +20,7 @@ if (process.argv[2] === "my-tweets") {
 } else if (process.argv[2] === "do-what-it-says"){
     doWhat()
 } else {
-    console.log("Please use commands: \"my-tweets\", \"spotify-this-song *nameOfSong*\", or \"movie-this *nammeOfMovie*\".")
+    console.log("Please use commands: \"my-tweets\", \"spotify-this-song *nameOfSong*\", \"movie-this *nammeOfMovie*\", or \"do-what-it-says\".")
 }
 
 // Function for Twitter to get tweets //
@@ -39,8 +41,9 @@ function getTweets() {
 
 // Function for Spotify to get song information //
 function getSpotify() {
-    var nameOfSong = process.argv[3];
-    if (process.argv[3] === undefined) {
+    var nameOfSong = (process.argv[3]) || (info);
+    console.log(info)
+    if (nameOfSong === undefined) {
         console.log("No song selected, going to default song.")
         nameOfSong = "The Sign Ace of Base"
     }
@@ -80,7 +83,7 @@ function doWhat() {
         if (e) {console.log(e)} else {
             var returnData = data.split(",");
             var action  = returnData[0];
-            var info = returnData[1];
+            info = returnData[1];
 
             switch(action){
                 case "my-tweets":
